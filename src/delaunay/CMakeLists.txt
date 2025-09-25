@@ -5,7 +5,7 @@ include_directories(${MSE_DIR})
 
 if(GSL_FOUND AND CGAL_FOUND)
 
-  include( ${CGAL_USE_FILE} )
+	# include( ${CGAL_USE_FILE} )
 
   if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
     STRING(REGEX REPLACE "-O2" " "  CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" )
