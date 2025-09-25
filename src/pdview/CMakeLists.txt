@@ -48,11 +48,22 @@ if(MATHGL_FOUND AND Qt5_FOUND)
   INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR})
   
   ADD_EXECUTABLE( pdview ${PDVIEW_SRCS} ${PDVIEW_MOC_SRCS} ${PDVIEW_RC_SRCS} ${PDVIEW_UI_HDRS} )
-  TARGET_LINK_LIBRARIES( pdview ${QT_LIBRARIES} ${MATHGL_LIBRARIES} )
+    # Add the paths to certain libraries in case we are in a conda env
+    set(MATHGL_LIBRARIES 
+	 "$ENV{CONDA_PREFIX}/lib/libmgl-qt5.so"
+         "$ENV{CONDA_PREFIX}/lib/libmgl.so")
+    # Link Qt5 and MathGL
+    target_link_libraries(pdview
+        Qt5::Core
+        Qt5::Widgets
+        Qt5::Gui
+        Qt5::OpenGL
+        ${MATHGL_LIBRARIES}
+    )
 
-#  if(GSL_FOUND)
-#    target_link_libraries(pdview ${GSL_LIBRARIES})
-#  endif(GSL_FOUND)
+  if(GSL_FOUND)
+    target_link_libraries(pdview ${GSL_LIBRARIES})
+  endif(GSL_FOUND)
 
   SET( TARGETS_LIST ${TARGETS_LIST} pdview PARENT_SCOPE)
   install (TARGETS pdview DESTINATION bin)
