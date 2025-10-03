@@ -15,6 +15,22 @@ You can also visit [DisPerSe](http://www2.iap.fr/users/sousbie/web/html/indexd41
 
 ---
 
+# Instalation options
+
+If a no-visualization setup is acceptable, a practical option could be use Docker.
+
+The following docker image provides a full **no GUI** DisPerSE build (no `pdview` available)
+``` bash
+docker pull franucles/disperse:latest
+```
+
+It can be executed with
+``` bash
+docker run -it franucles/disperse:latest
+```
+
+If a complete instalation is required, the below instructions must be followed.
+
 # Installing Required Packages
 
 To avoid version conflicts with system packages, we will use a virtual environment.
